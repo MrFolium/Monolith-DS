@@ -20995,3 +20995,10 @@ Entries:
   id: 2314
   time: '2026-05-11T09:25:32.0000000+00:00'
   url: https://github.com/Monolith-Station/Monolith/pull/3976
+- author: kasature90
+  changes:
+    - type: Add
+      message: Added AP/HP/RIP for 6.8x52mm finally.
+  id: 2315
+  time: '2026-05-11T09:26:38.0000000+00:00'
+  url: https://github.com/Monolith-Station/Monolith/pull/3929
