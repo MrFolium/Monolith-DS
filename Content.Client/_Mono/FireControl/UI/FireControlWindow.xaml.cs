@@ -185,6 +185,11 @@ public sealed partial class FireControlWindow : FancyWindow
         _currentState = state;
         NavRadar.UpdateState(state.NavState);
 
+        // Forge-Change-Start
+        ShieldPanel.Visible = state.NavState.ShieldState.HasShield;
+        ShieldBar.SetState(state.NavState.ShieldState);
+        // Forge-Change-End
+
         if (state.Connected)
         {
             ServerStatus.Text = Loc.GetString("gunnery-window-connected");
