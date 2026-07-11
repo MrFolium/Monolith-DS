@@ -110,4 +110,4 @@
       types:
         Piercing: 50
         Structural: 150
-    armorPenetration: 0.20
+    # armorPenetration: 0.20 # Commented by LuaM

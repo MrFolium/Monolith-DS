@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazine68x52mmCaseless
   name: "magazine (6.8x52mm STANAG Caseless)"
-  parent: [ BaseCartridge, RecyclableItemSteelTiny ]
+  parent: [ BaseItem, RecyclableItemSteelTiny ] # LuaM: BaseCartridge > BaseItem
   abstract: true
   components:
   - type: Tag

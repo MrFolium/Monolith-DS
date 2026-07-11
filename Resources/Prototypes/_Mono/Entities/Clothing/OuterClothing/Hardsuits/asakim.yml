@@ -20,7 +20,7 @@
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.35
+    damageCoefficient: 0.15 # LuaM 0.35 > 0.15
   - type: FireProtection
     reduction: 0.7
   - type: ProtectedFromStepTriggers
@@ -36,7 +36,7 @@
     modifiers:
       coefficients:
         Blunt: 0.35
-        Slash: 0.85
+        Slash: 0.50 # LuaM 0.85 > 0.50
         Piercing: 0.3
         Heat: 0.4
         Radiation: 0
@@ -44,8 +44,8 @@
         Poison: 0.4
         Caustic: 0.4
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9 # LuaM 0.8 > 0.9
+    sprintModifier: 0.9 # LuaM 0.8 > 0.9
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change - Mono - this is a solution for helmet attachment/cover to not fit on hardsuits
     requiredSlot: outerclothing

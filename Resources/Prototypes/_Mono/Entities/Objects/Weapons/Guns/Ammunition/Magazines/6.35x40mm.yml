@@ -1,7 +1,7 @@
 - type: entity
   id: BaseMagazine635x40mmCaseless
   name: "magazine (635x40mm Caseless)"
-  parent: [ BaseCartridge, RecyclableItemSteelTiny ]
+  parent: [ BaseItem, RecyclableItemSteelTiny ] # LuaM: BaseCartridge > BaseItem
   abstract: true
   components:
   - type: Tag

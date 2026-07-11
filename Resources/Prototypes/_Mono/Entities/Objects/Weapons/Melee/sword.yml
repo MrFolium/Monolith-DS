@@ -135,7 +135,7 @@
   - type: ComponentToggler
     components:
     - type: Reflect
-      reflectProb: 0.3
+      reflectProb: 0.4 # LuaM 0.3 > 0.4
   - type: ItemToggleSize
     activatedSize: Large
   - type: ItemToggleMeleeWeapon
@@ -154,10 +154,10 @@
         variation: 0.125
     activatedDamage:
       types:
-        Slash: 15
+        Slash: 40 # LuaM 15 > 40
         Caustic: 15
-        Heat: 15
-        Structural: 80
+      #  Heat: 15 # Commented by LuaM
+        Structural: 150 # LuaM 80 > 150
   - type: MeleeWeapon
     heavyStaminaCost: 1
     wideAnimationRotation: -135
@@ -295,7 +295,7 @@
     - Belt
     - suitStorage
   - type: Reflect
-    reflectProb: 0.5 # LuaM 0.8 > 0.5
+    reflectProb: 0.75 # LuaM 0.8 > 0.5 > 0.75
     reflects:
     - Energy
     - NonEnergy
@@ -305,7 +305,7 @@
     price: 5000 # YOU CALL THAT A BLADE.... I'LL SHOW YOU A BLADE...
   - type: WeaponMeleeCharge
     activeTime: 5 #LuaM: 3 > 5
-    cooldown: 15 #LuaM 30 > 15
+    cooldown: 20 #LuaM 30 > 15 > 20
     cooldownDamagePenalty:
       types:
         Slash: -27
