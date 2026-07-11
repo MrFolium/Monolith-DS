@@ -6,7 +6,7 @@ using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Chat;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Database;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Systems;
@@ -89,6 +89,7 @@ public sealed partial class RadioSystem : EntitySystem
             // Send radio noise event to client for IPCs
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
+// Corvax-TTS-start:
 
             if (uid != args.MessageSource &&
                 HasComp<TTSComponent>(args.MessageSource) &&
@@ -96,6 +97,7 @@ public sealed partial class RadioSystem : EntitySystem
             {
                 args.Receivers.Add(uid);
             }
+// Corvax-TTS-end.
         }
     }
 
@@ -256,7 +258,7 @@ public sealed partial class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
         }
 
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, content, obfuscated, language, ev.Receivers.ToArray()));
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, content, obfuscated, language, ev.Receivers.ToArray())); // Corvax-TTS
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");

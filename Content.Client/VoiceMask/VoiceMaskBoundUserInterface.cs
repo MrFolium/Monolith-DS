@@ -22,12 +22,12 @@ public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindow<VoiceMaskNameChangeWindow>();
         _window.ReloadVerbs(_protomanager);
-        _window.ReloadVoices(_protomanager);
+        _window.ReloadVoices(_protomanager); // Corvax-TTS
         _window.AddVerbs();
 
         _window.OnNameChange += OnNameSelected;
         _window.OnVerbChange += verb => SendMessage(new VoiceMaskChangeVerbMessage(verb));
-        _window.OnVoiceChange += voice => SendMessage(new VoiceMaskChangeVoiceMessage(voice));
+        _window.OnVoiceChange += voice => SendMessage(new VoiceMaskChangeVoiceMessage(voice)); // Corvax-TTS
     }
 
     private void OnNameSelected(string name)
@@ -42,7 +42,7 @@ public sealed partial class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name, cast.Verb, cast.Voice);
+        _window.UpdateState(cast.Name, cast.Verb, cast.Voice); // Corvax-TTS: added cast.Voice
     }
 
     protected override void Dispose(bool disposing)

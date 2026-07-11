@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Content.Shared._Mono.Company;
 using Content.Shared._NF.Bank;
 using Content.Shared.CCVar;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -87,8 +87,10 @@ namespace Content.Shared.Preferences
         [DataField]
         public ProtoId<SpeciesPrototype> Species { get; set; } = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
+// Corvax-TTS-start:
         [DataField]
         public string Voice { get; set; } = SharedHumanoidAppearanceSystem.DefaultVoice;
+// Corvax-TTS-end.
 
         [DataField]
         public int Age { get; set; } = 18;
@@ -163,12 +165,12 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
             string company = "None",
-            string? voice = null)
+            string? voice = null) // Corvax-TTS
         {
             Name = name;
             FlavorText = flavortext;
             Species = species;
-            Voice = voice ?? SharedHumanoidAppearanceSystem.DefaultVoice;
+            Voice = voice ?? SharedHumanoidAppearanceSystem.DefaultVoice; // Corvax-TTS
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -191,7 +193,7 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts)
             : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.BankBalance, other.Appearance, other.SpawnPriority,
-                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.Voice)
+                jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences, loadouts, other.Company, other.Voice) // Corvax-TTS: added other.Voice
         {
         }
 
@@ -212,7 +214,7 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 other.Company,
-                other.Voice)
+                other.Voice) // Corvax-TTS
         {
         }
 
@@ -279,6 +281,7 @@ namespace Content.Shared.Preferences
             }
 
             var name = GetName(species, gender);
+// Corvax-TTS-start:
             var voiceChoices = prototypeManager
                 .EnumeratePrototypes<TTSVoicePrototype>()
                 .Where(o => CanHaveVoice(o, sex) && !o.SponsorOnly)
@@ -286,6 +289,7 @@ namespace Content.Shared.Preferences
             var voice = voiceChoices.Length == 0
                 ? SharedHumanoidAppearanceSystem.DefaultSexVoice.GetValueOrDefault(sex, SharedHumanoidAppearanceSystem.DefaultVoice)
                 : random.Pick(voiceChoices).ID;
+// Corvax-TTS-end.
 
             return new HumanoidCharacterProfile()
             {
@@ -294,7 +298,7 @@ namespace Content.Shared.Preferences
                 Age = age,
                 Gender = gender,
                 Species = species,
-                Voice = voice,
+                Voice = voice, // Corvax-TTS
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
             };
         }
@@ -336,11 +340,12 @@ namespace Content.Shared.Preferences
             return new(this) { Species = species };
         }
 
+// Corvax-TTS-start:
         public HumanoidCharacterProfile WithVoice(string voice)
         {
             return new(this) { Voice = voice };
         }
-
+// Corvax-TTS-end.
 
         public HumanoidCharacterProfile WithCharacterAppearance(HumanoidCharacterAppearance appearance)
         {
@@ -530,7 +535,7 @@ namespace Content.Shared.Preferences
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
             if (Species != other.Species) return false;
-            if (Voice != other.Voice) return false;
+            if (Voice != other.Voice) return false; // Corvax-TTS
             if (Company != other.Company) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
@@ -652,12 +657,14 @@ namespace Content.Shared.Preferences
             // End Frontier
 
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex);
+// Corvax-TTS-start:
             var voiceId = Voice;
             if (!prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var voice) ||
                 !CanHaveVoice(voice, sex))
             {
                 voiceId = SharedHumanoidAppearanceSystem.DefaultSexVoice.GetValueOrDefault(sex, SharedHumanoidAppearanceSystem.DefaultVoice);
             }
+// Corvax-TTS-end.
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -708,7 +715,7 @@ namespace Content.Shared.Preferences
             Age = age;
             Sex = sex;
             Gender = gender;
-            Voice = voiceId;
+            Voice = voiceId; // Corvax-TTS
             BankBalance = bankBalance;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
@@ -825,7 +832,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Name);
             hashCode.Add(FlavorText);
             hashCode.Add(Species);
-            hashCode.Add(Voice);
+            hashCode.Add(Voice); // Corvax-TTS
             hashCode.Add(Age);
             hashCode.Add((int)Sex);
             hashCode.Add((int)Gender);
@@ -877,9 +884,11 @@ namespace Content.Shared.Preferences
             return new HumanoidCharacterProfile(this);
         }
 
+// Corvax-TTS-start:
         public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
         {
             return voice.RoundStart && (sex == Sex.Unsexed || voice.Sex == sex || voice.Sex == Sex.Unsexed);
         }
+// Corvax-TTS-end.
     }
 }

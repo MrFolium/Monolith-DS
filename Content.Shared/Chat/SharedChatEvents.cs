@@ -1,8 +1,8 @@
-using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language; // Corvax-TTS
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 using Content.Shared.Inventory;
-using Robust.Shared.Player;
+using Robust.Shared.Player; // Corvax-TTS
 
 namespace Content.Shared.Chat;
 
@@ -25,6 +25,7 @@ public sealed class TransformSpeakerNameEvent : EntityEventArgs, IInventoryRelay
     }
 }
 
+// Corvax-TTS-start:
 /// <summary>
 /// Raised after a radio message is sent, with the entities that actually received it.
 /// </summary>
@@ -71,3 +72,4 @@ public sealed class AnnounceSpokeEvent : EntityEventArgs
         Language = language;
     }
 }
+// Corvax-TTS-end.

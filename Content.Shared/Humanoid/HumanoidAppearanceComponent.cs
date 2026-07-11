@@ -48,8 +48,10 @@ public sealed partial class HumanoidAppearanceComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public ProtoId<SpeciesPrototype> Species { get; set; }
 
+// Corvax-TTS-start:
     [DataField("voice")]
     public ProtoId<TTSVoicePrototype> Voice { get; set; } = SharedHumanoidAppearanceSystem.DefaultVoice;
+// Corvax-TTS-end.
 
     /// <summary>
     ///     The initial profile and base layers to apply to this humanoid.

@@ -22,7 +22,7 @@
     endAudio:
       path: /Audio/_LuaM/Music/running_in.ogg # LuaM: /Audio/Misc/gamma.ogg > /Audio/_LuaM/Music/running_in.ogg
       params:
-        volume: -1
+        volume: -3
 
 - type: entity
   id: PortstrikeAnnounceRuleHour1

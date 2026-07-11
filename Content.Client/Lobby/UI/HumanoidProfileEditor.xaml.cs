@@ -1196,7 +1196,7 @@ namespace Content.Client.Lobby.UI
             UpdateNameEdit();
             UpdateFlavorTextEdit();
             UpdateSexControls();
-            UpdateTTSVoicesControls();
+            UpdateTTSVoicesControls(); // Corvax-TTS
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
@@ -1657,7 +1657,7 @@ namespace Content.Client.Lobby.UI
             }
 
             UpdateGenderControls();
-            UpdateTTSVoicesControls();
+            UpdateTTSVoicesControls(); // Corvax-TTS
             Markings.SetSex(newSex);
             ReloadPreview();
         }
@@ -1681,7 +1681,7 @@ namespace Content.Client.Lobby.UI
             // Frontier: In case there's species restrictions for traits
             RefreshTraits(); // Frontier
             UpdateSexControls(); // update sex for new species
-            UpdateTTSVoicesControls();
+            UpdateTTSVoicesControls(); // Corvax-TTS
             UpdateSpeciesGuidebookIcon();
             ReloadPreview();
         }

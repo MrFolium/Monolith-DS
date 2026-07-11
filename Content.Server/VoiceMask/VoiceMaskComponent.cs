@@ -1,4 +1,4 @@
-using Content.Shared.Humanoid;
+using Content.Shared.Humanoid; // Corvax-TTS-end.
 using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 
@@ -27,9 +27,11 @@ public sealed partial class VoiceMaskComponent : Component
     [DataField]
     public ProtoId<SpeechVerbPrototype>? VoiceMaskSpeechVerb;
 
+// Corvax-TTS-start:
     [DataField]
     public string VoiceId = SharedHumanoidAppearanceSystem.DefaultVoice;
 
+// Corvax-TTS-end.
     /// <summary>
     ///     The action that gets displayed when the voice mask is equipped.
     /// </summary>

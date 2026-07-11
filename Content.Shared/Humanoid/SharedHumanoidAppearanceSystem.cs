@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Shared.CCVar;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Decals;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid.Markings;
@@ -46,6 +46,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
     [ValidatePrototypeId<SpeciesPrototype>]
     public const string DefaultSpecies = "Human";
 
+// Corvax-TTS-start:
     [ValidatePrototypeId<TTSVoicePrototype>]
     public const string DefaultVoice = "Noble";
 
@@ -56,6 +57,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         { Sex.Unsexed, "Myron" },
     };
 
+// Corvax-TTS-end.
     public override void Initialize()
     {
         base.Initialize();
@@ -175,7 +177,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         targetHumanoid.Height = sourceHumanoid.Height;
         targetHumanoid.Width = sourceHumanoid.Width;
         SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
-        SetTTSVoice(target, sourceHumanoid.Voice, false, targetHumanoid);
+        SetTTSVoice(target, sourceHumanoid.Voice, false, targetHumanoid); // Corvax-TTS
         targetHumanoid.CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers);
         targetHumanoid.MarkingSet = new(sourceHumanoid.MarkingSet);
 
@@ -409,7 +411,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
 
         SetSpecies(uid, profile.Species, false, humanoid);
         SetSex(uid, profile.Sex, false, humanoid);
-        SetTTSVoice(uid, profile.Voice, false, humanoid);
+        SetTTSVoice(uid, profile.Voice, false, humanoid); // Corvax-TTS
         humanoid.EyeColor = profile.Appearance.EyeColor;
 
         SetSkinColor(uid, profile.Appearance.SkinColor, false);
@@ -523,6 +525,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
             Dirty(uid, humanoid);
     }
 
+// Corvax-TTS-start:
     public void SetTTSVoice(EntityUid uid, string voiceId, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
     {
         if (!Resolve(uid, ref humanoid))
@@ -536,6 +539,7 @@ public abstract partial class SharedHumanoidAppearanceSystem : EntitySystem
         if (sync)
             Dirty(uid, humanoid);
     }
+// Corvax-TTS-end.
 
     private void EnsureDefaultMarkings(EntityUid uid, HumanoidAppearanceComponent? humanoid)
     {

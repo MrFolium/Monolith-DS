@@ -1,6 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.AlertLevel;
-using Content.Server._EinsteinEngines.Language;
+using Content.Server._EinsteinEngines.Language; // Corvax-TTS
 using Content.Server.Chat.Systems;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Popups;
@@ -10,20 +10,20 @@ using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared._EinsteinEngines.Language;
+using Content.Shared._EinsteinEngines.Language; // Corvax-TTS
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
-using Content.Shared.Station.Components;
+using Content.Shared.Station.Components; // Corvax-TTS
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
-using Robust.Shared.Player;
+using Robust.Shared.Player; // Corvax-TTS
 using Content.Server._NF.SectorServices; // Frontier
 
 namespace Content.Server.Communications
@@ -42,7 +42,7 @@ namespace Content.Server.Communications
         [Dependency] private IConfigurationManager _cfg = default!;
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private SectorServiceSystem _sectorService = default!; // Frontier: sector-wide alerts
-        [Dependency] private LanguageSystem _language = default!;
+        [Dependency] private LanguageSystem _language = default!; // Corvax-TTS
 
         private const float UIUpdateInterval = 5.0f;
 
@@ -268,8 +268,9 @@ namespace Content.Server.Communications
             Loc.TryGetString(comp.Title, out var title);
             title ??= comp.Title;
 
-            var ttsMessage = msg;
+            var ttsMessage = msg; // Corvax-TTS
             msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
+// Corvax-TTS-start:
             var voice = string.Empty;
             LanguagePrototype? language = null;
             if (message.Actor is { Valid: true } actor &&
@@ -278,24 +279,28 @@ namespace Content.Server.Communications
                 voice = tts.VoicePrototypeId ?? string.Empty;
                 language = _language.GetLanguage(actor);
             }
+// Corvax-TTS-end.
 
             if (comp.Global)
             {
                 _chatSystem.DispatchGlobalAnnouncement(msg, title, announcementSound: comp.Sound, colorOverride: comp.Color);
-                TrySendTtsAnnouncement(voice, ttsMessage, Filter.Broadcast(), message.Actor, language);
+                TrySendTtsAnnouncement(voice, ttsMessage, Filter.Broadcast(), message.Actor, language); // Corvax-TTS
 
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following global announcement: {msg}");
                 return;
             }
 
             _chatSystem.DispatchStationAnnouncement(uid, msg, title, colorOverride: comp.Color);
+// Corvax-TTS-start:
             if (TryGetStationAnnouncementFilter(uid, out var filter))
                 TrySendTtsAnnouncement(voice, ttsMessage, filter, message.Actor, language);
+// Corvax-TTS-end.
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following station announcement: {msg}");
 
         }
 
+// Corvax-TTS-start:
         private void TrySendTtsAnnouncement(string? voice, string message, Filter filter, EntityUid? source, LanguagePrototype? language)
         {
             if (string.IsNullOrWhiteSpace(voice))
@@ -318,6 +323,7 @@ namespace Content.Server.Communications
             return true;
         }
 
+// Corvax-TTS-end.
         private void OnBroadcastMessage(EntityUid uid, CommunicationsConsoleComponent component, CommunicationsConsoleBroadcastMessage message)
         {
             if (!TryComp<DeviceNetworkComponent>(uid, out var net))

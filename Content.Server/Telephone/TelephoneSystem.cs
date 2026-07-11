@@ -7,7 +7,7 @@ using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Server._EinsteinEngines.Language;
 using Content.Shared.Chat;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Database;
 using Content.Shared.Labels.Components;
 using Content.Shared.Mind.Components;
@@ -110,7 +110,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
 
         // Determine if speech should be relayed via the telephone itself or a designated speaker
         var speaker = entity.Comp.Speaker != null ? entity.Comp.Speaker.Value.Owner : entity.Owner;
-        SyncRelayedSpeakerTts(args.MessageSource, speaker);
+        SyncRelayedSpeakerTts(args.MessageSource, speaker); // Corvax-TTS
 
         var name = Loc.GetString("chat-telephone-name-relay",
             ("originalName", nameEv.VoiceName),
@@ -122,6 +122,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         _chat.TrySendInGameICMessage(speaker, args.Message, volume, range, nameOverride: name, checkRadioPrefix: false, languageOverride: args.Language); // Einstein Engines - Language
     }
 
+// Corvax-TTS-start:
     private void SyncRelayedSpeakerTts(EntityUid messageSource, EntityUid speaker)
     {
         var speakerTts = EnsureComp<TTSComponent>(speaker);
@@ -137,6 +138,7 @@ public sealed partial class TelephoneSystem : SharedTelephoneSystem
         speakerTts.VoicePrototypeId = voiceEv.VoiceId;
     }
 
+// Corvax-TTS-end.
     #endregion
 
     public override void Update(float frameTime)

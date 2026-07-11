@@ -24,8 +24,10 @@ namespace Content.Shared.Administration
             public string Announcer = default!;
             public string Announcement = default!;
             public AdminAnnounceType AnnounceType;
+// Corvax-TTS-start:
             public string Voice = default!;
             public bool EnableTTS;
+// Corvax-TTS-end.
         }
     }
 }

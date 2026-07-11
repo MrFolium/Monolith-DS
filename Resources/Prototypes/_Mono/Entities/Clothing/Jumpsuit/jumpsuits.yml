@@ -522,23 +522,6 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitCombatSuitSummerFloraFlag
-  name: Summer flora combat uniform
-  description: Summer flora camouflaged combat suit with some odd flag stitched to it. Camo in space... This one has been lightly used and retain its original camo.
-  components:
-  - type: StaticPrice
-    price: 700
-    vendPrice: 1150
-  - type: Sprite
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/combat-suits/summer_flora_flag.rsi
-  - type: Clothing
-    sprite: _Mono/Clothing/Uniforms/Jumpsuit/combat-suits/summer_flora_flag.rsi
-  - type: SuitSensor
-    randomMode: false
-    mode: SensorVitals
-
-- type: entity
-  parent: ClothingUniformBase
   id: ClothingUniformJumpsuitCombatSuitSummerFlora
   name: Summer flora combat uniform
   description: Summer flora camouflaged combat suit. Camo in space... This one has been lightly used and retain its original camo.

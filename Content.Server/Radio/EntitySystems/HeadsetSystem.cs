@@ -3,7 +3,7 @@ using Content.Server.Emp;
 using Content.Server.Radio.Components;
 using Content.Shared._Mono.Radio;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Corvax.TTS;
+using Content.Shared.Corvax.TTS; // Corvax-TTS
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Server.Speech;
@@ -57,7 +57,7 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
             && TryComp(component.Headset, out EncryptionKeyHolderComponent? keys)
             && keys.Channels.Contains(args.Channel.ID))
         {
-            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset, language: args.Language);
+            _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset, language: args.Language); // Corvax-TTS: added language: args.Language)
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
@@ -106,12 +106,15 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
+//         if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor)) // Commented by // Corvax-TTS
+// Corvax-TTS-start:
         var parent = Transform(uid).ParentUid;
 
         if (TryComp(parent, out ActorComponent? actor))
+// Corvax-TTS-end.
         {
             // Einstein Engines - Language begin
-            var canUnderstand = _language.CanUnderstand(parent, args.Language.ID);
+            var canUnderstand = _language.CanUnderstand(parent, args.Language.ID); // Corvax-TTS: Transform(uid).ParentUid > parent
             var msg = new MsgChatMessage
             {
                 Message = canUnderstand ? args.OriginalChatMsg : args.LanguageObfuscatedChatMsg
@@ -122,19 +125,21 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
 
             // Mono - Borers begin
             var ev = new RadioMessageHeardEvent(uid, msg, args.Channel);
-            RaiseLocalEvent(parent, ref ev);
+            RaiseLocalEvent(parent, ref ev); // Corvax-TTS: Transform(uid).ParentUid > parent
             // Mono - Borers end
 
             // Send radio noise event to client
             var radioNoiseEvent = new RadioNoiseEvent(GetNetEntity(uid), args.Channel.ID);
             RaiseNetworkEvent(radioNoiseEvent, actor.PlayerSession);
 
+// Corvax-TTS-start:
             if (parent != args.MessageSource &&
                 HasComp<TTSComponent>(args.MessageSource) &&
                 !args.Receivers.Contains(parent))
             {
                 args.Receivers.Add(parent);
             }
+// Corvax-TTS-end.
         }
     }
 }

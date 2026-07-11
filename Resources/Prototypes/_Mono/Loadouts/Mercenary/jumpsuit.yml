@@ -53,12 +53,6 @@
     jumpsuit: ClothingUniformJumpsuitCombatSuitLampart
 
 - type: loadout
-  id: MercenaryClothingUniformJumpsuitCombatSuitSummerFloraFlag
-  price: 150 # LuaM: 0 > 150
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitCombatSuitSummerFloraFlag
-
-- type: loadout
   id: MercenaryClothingUniformJumpsuitCombatSuitSummerFlora
   price: 150 # LuaM: 0 > 150
   equipment:

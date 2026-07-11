@@ -25,8 +25,10 @@ namespace Content.Client.Administration.UI
                 Announcer =  _window.Announcer.Text,
                 AnnounceType =  (AdminAnnounceType) (_window.AnnounceMethod.SelectedMetadata ?? AdminAnnounceType.Station),
                 CloseAfter = !_window.KeepWindowOpen.Pressed,
+// Corvax-TTS-start:
                 Voice = (string) (_window.VoiceSelector.SelectedMetadata ?? ""),
                 EnableTTS = _window.EnableTTS.Pressed,
+// Corvax-TTS-end.
             });
 
         }

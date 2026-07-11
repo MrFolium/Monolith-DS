@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections.Generic; // Corvax-TTS
 using Content.Shared.Chat;
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared.Radio;
@@ -18,7 +18,7 @@ public readonly record struct RadioReceiveEvent(
     ChatMessage LanguageObfuscatedChatMsg,
     LanguagePrototype Language,
     EntityUid RadioSource,
-    List<EntityUid> Receivers
+    List<EntityUid> Receivers // Corvax-TTS
 );
 // Einstein Engines - Language end
 

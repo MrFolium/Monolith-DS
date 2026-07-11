@@ -280,7 +280,7 @@ namespace Content.Server.Database
                 traits.ToHashSet(),
                 loadouts,
                 company,
-                string.IsNullOrEmpty(profile.Voice) ? null : profile.Voice);
+                string.IsNullOrEmpty(profile.Voice) ? null : profile.Voice); // Corvax-TTS
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)
@@ -297,7 +297,7 @@ namespace Content.Server.Database
             profile.CharacterName = humanoid.Name;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice;
+            profile.Voice = humanoid.Voice; // Corvax-TTS
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();

@@ -781,9 +781,11 @@ public sealed partial class ChatSystem : SharedChatSystem
                     _adminLogger.Add(LogType.Chat, LogImpact.Low,
                         $"Direct messaged from {ToPrettyString(source):user}, original: {originalMessage}, transformed: {message}.");
             }
+// Corvax-TTS-start:
 
         var ev = new EntitySpokeToEntityEvent(source, message, languageObfuscatedMessage, recipients, language);
         RaiseLocalEvent(source, ev, true);
+// Corvax-TTS-end.
     }
 
     private void SendEntityEmote(
@@ -1270,6 +1272,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     }
 }
 
+// Corvax-TTS-start:
 /// <summary>
 ///     Raised on an entity when it speaks directly to one or more target entities.
 /// </summary>
@@ -1296,4 +1299,5 @@ public sealed class EntitySpokeToEntityEvent : EntityEventArgs
     }
 }
 
+// Corvax-TTS-end.
 // The three chat type enums (InGameICChatType, InGameOOCChatType, and ChatTransmitRange) have been moved to Shared.

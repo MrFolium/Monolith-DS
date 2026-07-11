@@ -13,13 +13,13 @@ public sealed class VoiceMaskBuiState : BoundUserInterfaceState
 {
     public readonly string Name;
     public readonly string? Verb;
-    public readonly string Voice;
+    public readonly string Voice; // Corvax-TTS
 
-    public VoiceMaskBuiState(string name, string? verb, string voice)
+    public VoiceMaskBuiState(string name, string? verb, string voice) // Corvax-TTS: added string voice
     {
         Name = name;
         Verb = verb;
-        Voice = voice;
+        Voice = voice; // Corvax-TTS
     }
 }
 
@@ -47,7 +47,7 @@ public sealed class VoiceMaskChangeVerbMessage : BoundUserInterfaceMessage
         Verb = verb;
     }
 }
-
+// Corvax-TTS-start:
 [Serializable, NetSerializable]
 public sealed class VoiceMaskChangeVoiceMessage : BoundUserInterfaceMessage
 {
@@ -58,3 +58,4 @@ public sealed class VoiceMaskChangeVoiceMessage : BoundUserInterfaceMessage
         Voice = voice;
     }
 }
+// Corvax-TTS-end.

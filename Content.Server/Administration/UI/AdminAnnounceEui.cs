@@ -4,11 +4,11 @@ using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.EUI;
 using Content.Shared.Administration;
-using Content.Shared.Chat;
+using Content.Shared.Chat; // Corvax-TTS
 using Content.Shared.Eui;
 using Robust.Shared.Audio; // Frontier
-using Robust.Shared.GameObjects;
-using Robust.Shared.Player;
+using Robust.Shared.GameObjects; // Corvax-TTS
+using Robust.Shared.Player; // Corvax-TTS
 
 namespace Content.Server.Administration.UI
 {
@@ -16,7 +16,7 @@ namespace Content.Server.Administration.UI
     {
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private IChatManager _chatManager = default!;
-        [Dependency] private IEntityManager _entityManager = default!;
+        [Dependency] private IEntityManager _entityManager = default!; // Corvax-TTS
         private readonly ChatSystem _chatSystem;
 
         public AdminAnnounceEui()
@@ -62,6 +62,7 @@ namespace Content.Server.Administration.UI
                             break;
                     }
 
+// Corvax-TTS-start:
                     if (doAnnounce.EnableTTS && !string.IsNullOrWhiteSpace(doAnnounce.Voice))
                     {
                         _entityManager.EventBus.RaiseEvent(
@@ -69,6 +70,7 @@ namespace Content.Server.Administration.UI
                             new AnnounceSpokeEvent(doAnnounce.Voice, doAnnounce.Announcement, Filter.Broadcast(), null));
                     }
 
+// Corvax-TTS-end.
                     StateDirty();
 
                     if (doAnnounce.CloseAfter)

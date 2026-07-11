@@ -60,6 +60,7 @@ public sealed partial class AudioTab : Control
             _cfg.GetCVar(CCVars.MinMaxAmbientSourcesConfigured),
             _cfg.GetCVar(CCVars.MaxMaxAmbientSourcesConfigured));
 
+// Corvax-TTS-start:
         Control.AddOptionPercentSlider(
             CCVars.TTSVolume,
             SliderVolumeTts,
@@ -71,6 +72,7 @@ public sealed partial class AudioTab : Control
             scale: ContentAudioSystem.TtsMultiplier);
 
         Control.AddOptionCheckBox(CCVars.RadioTTSSoundsEnabled, RadioTTSSoundsCheckBox);
+// Corvax-TTS-end.
 
         // Mono begin
         Control.AddOptionPercentSlider(

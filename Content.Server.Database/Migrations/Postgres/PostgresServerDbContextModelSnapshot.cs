@@ -942,10 +942,12 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("species");
 
+// Corvax-TTS-start:
                     b.Property<string>("Voice")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("voice");
+// Corvax-TTS-end.
 
                     b.Property<float>("Width")
                         .HasColumnType("real")

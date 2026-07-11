@@ -894,10 +894,12 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
 
+// Corvax-TTS-start:
                     b.Property<string>("Voice")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("voice");
+// Corvax-TTS-end.
 
                     b.Property<float>("Width")
                         .HasColumnType("REAL")
