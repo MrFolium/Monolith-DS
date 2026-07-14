@@ -78,12 +78,12 @@
   categories:
   - UplinkDeception
 
-- type: listing
+- type: listing # LuaM
   id: UplinkSyndicateApplicator
   name: uplink-syndicate-applicator-name
   description: uplink-syndicate-applicator-desc
-  productEntity: NaniteApplicatorSyndicate
+  productEntity: NaniteApplicatorExperimental
   cost:
-    Telecrystal: 35
+    Telecrystal: 15
   categories:
   - UplinkDisruption

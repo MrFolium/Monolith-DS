@@ -475,13 +475,13 @@
       tags:
       - PirateUplink
 
-- type: listing
+- type: listing # LuaM
   id: UplinkPirateSyndicateApplicator
   name: uplink-syndicate-applicator-name
   description: uplink-syndicate-applicator-desc
-  productEntity: NaniteApplicatorSyndicate
+  productEntity: NaniteApplicatorExperimental
   cost:
-    Doubloon: 35
+    Doubloon: 15
   categories:
   - UplinkPirateUtility
   conditions:

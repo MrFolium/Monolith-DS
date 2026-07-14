@@ -17886,7 +17886,7 @@ entities:
     - type: Transform
       pos: -3.3705235,6.3534303
       parent: 1
-- proto: NaniteApplicatorSyndicate
+- proto: NaniteApplicatorExperimental # LuaM
   entities:
   - uid: 364
     components:
