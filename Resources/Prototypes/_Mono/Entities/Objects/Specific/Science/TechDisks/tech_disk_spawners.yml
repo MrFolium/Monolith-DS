@@ -46,6 +46,7 @@
     - id: TechDiskCivMicroreactors
     - id: TechDiskCivAdvancedTools
     - id: TechDiskCivTranslationBasic
+    - id: TechDiskCombatSilicon # LuaM
 
 #T2 TECH DISKS
 - type: entity
@@ -134,6 +135,7 @@
       - id: TechDiskMechWeaponsLight
       - id: TechDiskMechWeaponsMedium
       - id: TechDiskMechWeaponsHeavy
+      - id: TechDiskCombatSilicon # LuaM
       - !type:GroupSelector
         weight: 3
         children:
