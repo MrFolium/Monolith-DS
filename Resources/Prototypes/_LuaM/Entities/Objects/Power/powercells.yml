@@ -1,0 +1,38 @@
+- type: entity
+  name: experimental combat power cell
+  description: A rechargeable standardized power cell. This combat brand is equipped with partial protection from power spikes.
+  id: ExperimentalPowerCellCombat
+  suffix: Full
+  parent: PowerCellHigh
+  components:
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 12 # takes 1 minute to charge itself back to full
+  - type: Sprite
+    sprite: _LuaM/Objects/Power/power_cells.rsi
+    layers:
+    - map: [ "enum.PowerCellVisualLayers.Base" ]
+      state: experimental
+    - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+      state: o2
+      shader: unshaded
+  - type: EmpResistance
+    coefficient: 0.0001
+
+
+- type: entity
+  id: ExperimentalPowerCellCombatPrinted
+  suffix: Empty
+  parent: ExperimentalPowerCellCombat
+  components:
+  - type: Sprite
+    layers:
+      - map: [ "enum.PowerCellVisualLayers.Base" ]
+        state: experimental
+      - map: [ "enum.PowerCellVisualLayers.Unshaded" ]
+        state: o2
+        shader: unshaded
+        visible: false
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 0

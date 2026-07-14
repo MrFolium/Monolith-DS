@@ -1,0 +1,15 @@
+- type: latheRecipe
+  id: ExperimentalPowerCellCombat
+  result: ExperimentalPowerCellCombatPrinted
+  categories:
+  - Parts
+  completetime: 15
+  materials:
+    Steel: 500
+    Plasteel: 250
+    Glass: 400
+    Plastic: 200
+    UraniumFissile: 50
+    Gold: 300
+    Diamond: 25
+
