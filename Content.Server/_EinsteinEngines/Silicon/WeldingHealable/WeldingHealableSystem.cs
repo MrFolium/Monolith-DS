@@ -10,6 +10,7 @@ using Content.Shared.Tools;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Body.Systems;
 using SharedToolSystem = Content.Shared.Tools.Systems.SharedToolSystem;
+using Content.Shared.Interaction.Events; // LuaM
 
 namespace Content.Server._EinsteinEngines.Silicon.WeldingHealable;
 
@@ -24,6 +25,7 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
     {
         SubscribeLocalEvent<WeldingHealableComponent, InteractUsingEvent>(Repair);
         SubscribeLocalEvent<WeldingHealableComponent, SiliconRepairFinishedEvent>(OnRepairFinished);
+        SubscribeLocalEvent<WeldingHealingComponent, UseInHandEvent>(OnUseInHand); //LuaM
     }
 
     private void OnRepairFinished(EntityUid uid, WeldingHealableComponent healableComponent, SiliconRepairFinishedEvent args)
@@ -49,19 +51,22 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
         _popup.PopupEntity(str, uid, args.User);
 
         if (!args.Used.HasValue
-            || _toolSystem.GetWelderFuelAndCapacity(args.Used.Value).fuel < component.FuelCost) //Mono: Nanite applicator
+            || _toolSystem.GetWelderFuelAndCapacity(args.Used.Value).fuel < component.FuelCost //Mono: Nanite applicator
+            || !HasDamage((args.Target.Value, damageable), component, args.User)) //LuaM HasDamage check 
             return;
 
-        args.Handled = _toolSystem.UseTool
-            (args.Used.Value,
-            args.User,
-            uid,
-            args.Delay,
-            component.QualityNeeded,
-            new SiliconRepairFinishedEvent
-            {
-                Delay = args.Delay
-            });
+            args.Handled = _toolSystem.UseTool
+                (args.Used.Value,
+                args.User,
+                uid,
+                args.Delay,
+                component.QualityNeeded,
+                new SiliconRepairFinishedEvent
+                {
+                    Delay = args.Delay
+                },
+                breakOnMove: component.BreakOnMove, // LuaM 
+                breakOnDamage: component.BreakOnDamage); //LuaM dedefault value
     }
     private async void Repair(EntityUid uid, WeldingHealableComponent healableComponent, InteractUsingEvent args)
     {
@@ -77,8 +82,8 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
             return;
 
         float delay = args.User == args.Target
-            ? component.DoAfterDelay * component.SelfHealPenalty
-            : component.DoAfterDelay;
+            ? component.DoAfterDelay * component.SelfHealPenalty 
+            : component.DoAfterDelay ;
 
         args.Handled = _toolSystem.UseTool
             (args.Used,
@@ -89,8 +94,42 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
             new SiliconRepairFinishedEvent
             {
                 Delay = delay,
-            });
+            },
+            breakOnMove: component.BreakOnMove, // LuaM default value
+            breakOnDamage: component.BreakOnDamage); // LuaM default value
     }
+    // LuaM self-heal with Use in Hand
+    //LuaM-start:
+    private void OnUseInHand(Entity<WeldingHealingComponent> ent, ref UseInHandEvent args) 
+    {
+        var component = ent.Comp;
+
+        if (args.Handled
+            || !EntityManager.TryGetComponent(args.User, out DamageableComponent? damageable)
+            || damageable.DamageContainerID is null
+            || !component.DamageContainers.Contains(damageable.DamageContainerID)
+            || !HasDamage((args.User, damageable), component, args.User)
+            || !_toolSystem.HasQuality(ent.Owner, component.QualityNeeded)
+            || !component.AllowSelfHeal
+            || _toolSystem.GetWelderFuelAndCapacity(ent.Owner).fuel < component.FuelCost)
+            return;
+
+        float delay = component.DoAfterDelay * component.SelfHealPenalty;
+
+        args.Handled = _toolSystem.UseTool(
+            ent.Owner,
+            args.User,
+            args.User,
+            delay,
+            component.QualityNeeded,
+            new SiliconRepairFinishedEvent
+            {
+                Delay = delay,
+            },
+            breakOnMove: component.BreakOnMove,
+            breakOnDamage: component.BreakOnDamage);
+    }
+    //LuaM-end
 
     private bool HasDamage(Entity<DamageableComponent> damageable, WeldingHealingComponent healable, EntityUid user)
     {
@@ -98,8 +137,11 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
             return false;
 
         foreach (var type in healable.Damage.DamageDict)
-            if (damageable.Comp.Damage.DamageDict[type.Key].Value > 0)
+            if (damageable.Comp.Damage.DamageDict.TryGetValue(type.Key, out var damage) && // LuaM: Prevent crash if damage type is absent.
+                damage.Value > 0)
+            {
                 return true;
+            }
 
         // In case the healer is a humanoid entity with targeting, we run the check on the targeted parts.
         if (!TryComp(user, out TargetingComponent? targeting))
@@ -109,8 +151,11 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
         foreach (var part in _bodySystem.GetBodyChildrenOfType(damageable, targetType, symmetry: targetSymmetry))
             if (TryComp<DamageableComponent>(part.Id, out var damageablePart))
                 foreach (var type in healable.Damage.DamageDict)
-                    if (damageablePart.Damage.DamageDict[type.Key].Value > 0)
+                    if (damageablePart.Damage.DamageDict.TryGetValue(type.Key, out var damage) // LuaM: Prevent crash if damage type is absent.
+                    && damage.Value > 0)
+                    {
                         return true;
+                    }
 
         return false;
     }

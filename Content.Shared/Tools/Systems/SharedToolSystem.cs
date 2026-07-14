@@ -128,7 +128,9 @@ public abstract partial class SharedToolSystem : EntitySystem
         IEnumerable<string> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        bool breakOnMove = true, // LuaM defaut value
+        bool breakOnDamage = true) // LuaM defaut value
     {
         return UseTool(tool,
             user,
@@ -138,7 +140,9 @@ public abstract partial class SharedToolSystem : EntitySystem
             doAfterEv,
             out _,
             fuel,
-            toolComponent);
+            toolComponent,
+            breakOnMove, // LuaM 
+            breakOnDamage);  // LuaM 
     }
 
     /// <summary>
@@ -167,7 +171,10 @@ public abstract partial class SharedToolSystem : EntitySystem
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        bool breakOnMove = true, // LuaM defaut value
+        bool breakOnDamage = true) // LuaM defaut value
+    
     {
         id = null;
         if (!Resolve(tool, ref toolComponent, false))
@@ -179,8 +186,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
-            BreakOnDamage = true,
-            BreakOnMove = true,
+            BreakOnMove = breakOnMove, // LuaM 
+            BreakOnDamage = breakOnDamage, // LuaM 
             BreakOnWeightlessMove = false,
             NeedHand = tool != user,
             AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never
@@ -213,9 +220,12 @@ public abstract partial class SharedToolSystem : EntitySystem
         string toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        bool breakOnMove = true, // LuaM defaut value
+        bool breakOnDamage = true) // LuaM defaut value
     {
-        return UseTool(tool,
+        return UseTool(
+            tool,
             user,
             target,
             TimeSpan.FromSeconds(doAfterDelay),
@@ -223,7 +233,9 @@ public abstract partial class SharedToolSystem : EntitySystem
             doAfterEv,
             out _,
             fuel,
-            toolComponent);
+            toolComponent,
+            breakOnMove, // LuaM 
+            breakOnDamage); // LuaM 
     }
 
     /// <summary>
