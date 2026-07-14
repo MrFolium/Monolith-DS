@@ -90,6 +90,7 @@
   - JetpackVoid
   - PowerCellHigh
   - PowerCellMicroreactor
+  - ExperimentalPowerCellCombat # LuaM
 # Mercenary techfab
 ## Armor
   - TelescopicShield

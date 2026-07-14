@@ -109,6 +109,7 @@
   - PowerCellHigh
   # - PowerCellHyperNF
   - PowerCellCombat # Mono edit
+  - ExperimentalPowerCellCombat  # LuaM
   - PowerCellMicroreactor
 # Mercenary techfab
 ## Armor

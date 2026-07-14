@@ -46,6 +46,7 @@
   recipes:
   - PowerCellMicroreactor
   - PowerCellCombat # Mono edit
+  - ExperimentalPowerCellCombat # LuaM
   - PowerCellHigh
 
 - type: latheRecipePack
