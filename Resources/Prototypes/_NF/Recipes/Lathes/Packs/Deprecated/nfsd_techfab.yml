@@ -49,6 +49,8 @@
   - WeaponLaserCannon
   - WeaponLaserCarbine
   - WeaponXrayCannon
+  - NaniteApplicatorSyndicate # LuaM
+  - ExperimentalPowerCellCombat # LuaM
 
 - type: latheRecipePack
   id: NFNfsdTechfabDeprecatedEmag

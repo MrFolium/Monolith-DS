@@ -120,7 +120,6 @@
     - JetpackVoid
     - PowerCellHigh
     - PowerCellMicroreactor
-    - ExperimentalPowerCellCombat # LuaM
   # Engineering techfab
     - NanoManipulatorStockPart
     - PicoManipulatorStockPart

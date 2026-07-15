@@ -266,4 +266,4 @@
   - type: TechnologyDisk
     recipes:
     - NaniteApplicatorSyndicate
-    - ExperimentalPowerCellCombat
+    # - ExperimentalPowerCellCombat
