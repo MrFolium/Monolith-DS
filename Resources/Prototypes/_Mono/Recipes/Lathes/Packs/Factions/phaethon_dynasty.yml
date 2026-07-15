@@ -61,7 +61,7 @@
   - HyposprayRogue
   - AccessBreakerRogue
   - EmagRogue
-  # - NaniteApplicatorSyndicate
+  # - NaniteApplicatorSyndicate # Commented by LuaM
   - BasicBorgCombatModulePDV
   - AdvancedBorgCombatModulePDV
   - PrintableDirtyBomb
