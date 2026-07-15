@@ -34,5 +34,5 @@
         shader: unshaded
         visible: false
   - type: Battery
-    maxCharge: 1080
+    maxCharge: 480
     startingCharge: 0
