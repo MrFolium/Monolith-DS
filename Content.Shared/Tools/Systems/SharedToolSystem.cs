@@ -186,8 +186,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
-            BreakOnMove = breakOnMove, // LuaM 
-            BreakOnDamage = breakOnDamage, // LuaM 
+            BreakOnMove = breakOnMove, // LuaM true > breakOnMove, from fixed value to changeble value
+            BreakOnDamage = breakOnDamage, // LuaM true > breakOnDamage, from fixed value to changeble value
             BreakOnWeightlessMove = false,
             NeedHand = tool != user,
             AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never

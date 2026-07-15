@@ -116,8 +116,8 @@
     - Inorganic
   - type: ShowSyndicateIcons # Monolith
   - type: MovementSpeedModifier # LuaM
-    baseWalkSpeed: 35 
-    baseSprintSpeed: 15
+    baseWalkSpeed: 35 # LuaM 10 > 35
+    baseSprintSpeed: 15 # LuaM 35 > 15
 
 - type: entity
   id: ActionAGhostShowSolar
@@ -149,7 +149,7 @@
   description: View a Mass Scanner Interface.
   components:
   - type: InstantAction
-    icon: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
+    icon: { sprite: Interface/A9ctions/actions_ai.rsi, state: mass_scanner }
     iconOn: { sprite: Interface/Actions/actions_ai.rsi, state: mass_scanner }
     keywords: [ "AI", "console", "interface" ]
     priority: -6

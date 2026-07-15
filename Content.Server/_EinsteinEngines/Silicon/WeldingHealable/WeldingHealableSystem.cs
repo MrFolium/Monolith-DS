@@ -137,7 +137,8 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
             return false;
 
         foreach (var type in healable.Damage.DamageDict)
-            if (damageable.Comp.Damage.DamageDict.TryGetValue(type.Key, out var damage) && // LuaM: Prevent crash if damage type is absent.
+            // if (damageable.Comp.Damage.DamageDict[type.Key].Value > 0)
+            if (damageable.Comp.Damage.DamageDict.TryGetValue(type.Key, out var damage) && // LuaM: Safely handle missing damage types.
                 damage.Value > 0)
             {
                 return true;
@@ -151,7 +152,8 @@ public sealed partial class WeldingHealableSystem : SharedWeldingHealableSystem
         foreach (var part in _bodySystem.GetBodyChildrenOfType(damageable, targetType, symmetry: targetSymmetry))
             if (TryComp<DamageableComponent>(part.Id, out var damageablePart))
                 foreach (var type in healable.Damage.DamageDict)
-                    if (damageablePart.Damage.DamageDict.TryGetValue(type.Key, out var damage) // LuaM: Prevent crash if damage type is absent.
+                    // if (damageablePart.Damage.DamageDict[type.Key].Value > 0)
+                    if (damageablePart.Damage.DamageDict.TryGetValue(type.Key, out var damage) // LuaM: Safely handle missing damage types.
                     && damage.Value > 0)
                     {
                         return true;

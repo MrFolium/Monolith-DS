@@ -26,18 +26,19 @@ namespace Content.Server._EinsteinEngines.Silicon.WeldingHealing
         /// </summary>
         [DataField]
         public int FuelCost = 5;
-        
+// LuaM-start:          
         /// <summary>
         ///     Whether repairing is interrupted when the user moves
         /// </summary>
-        [DataField] //LuaM
+        [DataField] 
         public bool BreakOnMove = true;
 
          /// <summary>
         ///     Whether repairing is interrupted when the user takes damage
         /// </summary>
-        [DataField] //LuaM
+        [DataField] 
         public bool BreakOnDamage = true;
+// LuaM-end.
 
         [DataField]
         public int DoAfterDelay = 3; 

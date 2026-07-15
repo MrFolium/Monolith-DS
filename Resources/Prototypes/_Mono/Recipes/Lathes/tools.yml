@@ -17,10 +17,12 @@
   id: NaniteApplicatorSyndicate
   result: NaniteApplicatorSyndicate
   materials: # LuaM
-    Steel: 1000
+    Steel: 1000 # LuaM 500 > 1000
+    # LuaM-start:
     Plasma: 500
     Gold: 500
     UraniumFissile: 50
+    # LuaM-end
 
 
 - type: latheRecipe
