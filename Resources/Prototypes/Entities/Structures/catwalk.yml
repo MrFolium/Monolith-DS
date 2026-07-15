@@ -9,7 +9,7 @@
   - type: Anchorable
     flags:
     - Anchorable
-  # - type: Rotatable
+  # - type: Rotatable Commented by LuaM 
   - type: Clickable
   - type: Sprite
     sprite: Structures/catwalk.rsi

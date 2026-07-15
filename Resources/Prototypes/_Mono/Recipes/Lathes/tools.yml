@@ -16,7 +16,7 @@
   parent: BaseToolRecipe
   id: NaniteApplicatorSyndicate
   result: NaniteApplicatorSyndicate
-  materials: # LuaM
+  materials:
     Steel: 1000 # LuaM 500 > 1000
     # LuaM-start:
     Plasma: 500

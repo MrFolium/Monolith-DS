@@ -54,7 +54,7 @@
   cost: 10000
   recipeUnlocks:
   - JawsOfLifeRogue
-  # - NaniteApplicatorSyndicate
+  # - NaniteApplicatorSyndicate Commented by LuaM  
   technologyPrerequisites:
   - UniversalMaterialResearchT1
   position: 12, -1

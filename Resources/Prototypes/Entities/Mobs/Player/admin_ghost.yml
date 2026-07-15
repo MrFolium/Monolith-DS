@@ -116,8 +116,8 @@
     - Inorganic
   - type: ShowSyndicateIcons # Monolith
   - type: MovementSpeedModifier # LuaM
-    baseWalkSpeed: 35 # LuaM 10 > 35
-    baseSprintSpeed: 15 # LuaM 35 > 15
+    baseWalkSpeed: 35 
+    baseSprintSpeed: 15 
 
 - type: entity
   id: ActionAGhostShowSolar
