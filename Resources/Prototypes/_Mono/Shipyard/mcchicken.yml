@@ -6,8 +6,8 @@
 - type: vessel
   id: McChicken
   parent: BaseVessel
-  name: vessel-mcchicken-name # LuaM: AES McChicken > vessel-mcchicken-name
-  description: vessel-mcchicken-desc # LuaM: A cheap, fried food ship. For those who enjoy ungodly ammounts of calories, now made on the go! > vessel-mcchicken-desc
+  name: AES McChicken
+  description: A cheap, fried food ship. For those who enjoy ungodly ammounts of calories, now made on the go!.
   price: 28875
   category: Medium
   group: Shipyard
