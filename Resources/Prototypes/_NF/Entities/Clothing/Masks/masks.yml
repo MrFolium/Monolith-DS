@@ -90,30 +90,48 @@
   - type: Sprite
     sprite: _NF/Clothing/Mask/punkhalfmask.rsi
     layers:
-    - state: equipped-MASK
+    - state: icon-base-mask # LuaM equipped-MASK >  icon-base-mask
       map: [ "mask_main" ]
-      scale: 2, 2
-      offset: 0,-0.6
-    - state: decor-equipped-MASK
+      # LuaM start:
+      # scale: 2, 2
+      # offset: 0,-0.6
+      # LuaM end
+    - state: icon-decor-mask # LuaM decor-equipped-MASK >  icon-decor-mask
       map: [ "mask_decor" ]
       shader: unshaded
-      scale: 2, 2
-      offset: 0,-0.6
+      # LuaM start:
+      # scale: 2, 2
+      # offset: 0,-0.6
+      # LuaM end
   - type: Clothing
     sprite: _NF/Clothing/Mask/punkhalfmask.rsi
     clothingVisuals:
       mask:
       - state: equipped-MASK
-        map: [ "mask_main" ]
+        map: [ "clothing_mask_main" ] # LuaM mask_main >  clothing_mask_main
       - state: decor-equipped-MASK
-        map: [ "mask_decor" ]
+        map: [ "clothing_mask_decor" ]  # LuaM mask_decor >  clothing_mask_decor
         shader: unshaded
   - type: RandomSprite
+    # LuaM start:
+    # available:
+    # - mask_main:
+    #     equipped-MASK: CyberpunkDark
+    #   mask_decor:
+    #     decor-equipped-MASK: CyberpunkNeon
     available:
     - mask_main:
-        equipped-MASK: CyberpunkDark
+        icon-base-mask: Base
+      clothing_mask_main:
+        equipped-MASK: Base
       mask_decor:
-        decor-equipped-MASK: CyberpunkNeon
+        icon-decor-mask: Decor
+      clothing_mask_decor:
+        decor-equipped-MASK: Decor
+    mappedColors:
+      Base: CyberpunkDark
+      Decor: CyberpunkNeon
+    # LuaM end
   - type: IdentityBlocker
     coverage: MOUTH
 
