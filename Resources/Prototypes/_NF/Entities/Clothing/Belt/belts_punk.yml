@@ -9,24 +9,20 @@
   - type: Sprite
     sprite: _NF/Clothing/Belt/punk.rsi
     layers:
-    # LuaM commented start:  
-    # - state: base_belt_01
-    #   map: [ "belt_main" ]
+    # LuaM start:  
+      - state: base_belt_01 # LuaM base_belt_01 > icon_belt_01
+        map: [ "belt_main" ]
     #   scale: 1.8, 1.8
     #   offset: 0,0.1
-    # - state: decor_base_belt_01
-    #   map: [ "belt_decor" ]
+      - state: icon_decor_base_belt_01 # LuaM decor_base_belt_01 > icon_decor_base_belt_01
+        map: [ "belt_decor" ]
     #   scale: 1.8, 1.8
     #   offset: 0,0.1
     # - state: mask_null
     #   map: [ "belt_overlay" ]
     #   scale: 1.8, 1.8
     #   offset: 0,0.1  
-    # LuaM commented end
-    - state: icon_belt_01
-      map: [ "belt_main" ]
-    - state: icon_decor_base_belt_01
-      map: [ "belt_decor" ]
+    # LuaM end  
   - type: Clothing
     sprite: _NF/Clothing/Belt/punk.rsi
     clothingVisuals:
@@ -37,21 +33,21 @@
         map: [ "clothing_belt_decor" ] # LuaM belt_main > clothing_belt_decor
       - state: mask_null
         map: [ "clothing_belt_overlay" ] # LuaM belt_main > clothing_belt_overlay
-  # LuaM commented start: 
-  # - type: RandomSprite
-  #   available:
-  #     - belt_main:
-  #         base_belt_01: CyberpunkDark
-  #       belt_decor:
-  #         decor_base_belt_01: CyberpunkDark
-  #       belt_overlay:
-  #         decor_base_belt_02: CyberpunkDark
-  #         decor_base_belt_03: CyberpunkDark
-  #         decor_base_belt_04: CyberpunkDark
-  #         decor_base_belt_05: CyberpunkDark
-  #         mask_null: ""
-  # LuaM commented end
+ 
+  # LuaM end
   - type: RandomSprite
+    # LuaM start: 
+    # available:
+    #   - belt_main:
+    #       base_belt_01: CyberpunkDark
+    #     belt_decor:
+    #       decor_base_belt_01: CyberpunkDark
+    #     belt_overlay:
+    #       decor_base_belt_02: CyberpunkDark
+    #       decor_base_belt_03: CyberpunkDark
+    #       decor_base_belt_04: CyberpunkDark
+    #       decor_base_belt_05: CyberpunkDark
+    #       mask_null: ""
     available:
       - belt_main:
           icon_belt_01: Base
@@ -70,3 +66,4 @@
     mappedColors:
       Base: CyberpunkDark
       Decor: CyberpunkDark
+    # LuaM end
