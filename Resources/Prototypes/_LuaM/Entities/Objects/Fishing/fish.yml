@@ -1,0 +1,19 @@
+- type: entity
+  id: BullShark
+  parent: BaseFish
+  name: bull shark
+  description: Lives at depths of up to 164 m, but you caught it in a puddle.
+  components:
+  - type: Sprite
+    sprite: _LuaM/Objects/Fishing/fish.rsi
+    state: bull_shark
+  - type: Item
+    size: Huge
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatBullShark
+      amount: 3
+    - id: MaterialToothSpaceCarp1
+      amount: 2
+    - id: FoodMeatBullSharkFillet
+      amount: 2
