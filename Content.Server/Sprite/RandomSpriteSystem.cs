@@ -7,10 +7,10 @@ using Robust.Shared.Random;
 
 namespace Content.Server.Sprite;
 
-public sealed class RandomSpriteSystem: SharedRandomSpriteSystem // LuaM del: partial
+public sealed partial class RandomSpriteSystem: SharedRandomSpriteSystem
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!; // LuaM add: readonly
-    [Dependency] private readonly IRobustRandom _random = default!; // LuaM add: readonly
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -26,15 +26,6 @@ public sealed class RandomSpriteSystem: SharedRandomSpriteSystem // LuaM del: pa
 
         if (component.Available.Count == 0)
             return;
-
-        // LuaM start: select mapped colours
-        Dictionary<string, Color> mappedColors = new();
-        foreach (var (key, value) in component.MappedColors)
-        {
-            if (_prototype.TryIndex<ColorPalettePrototype>(value, out var palette))
-                mappedColors[key] = _random.Pick(palette.Colors.Values);
-        }
-        // LuaM end 
 
         var groups = new List<Dictionary<string, Dictionary<string, string?>>>();
         if (component.GetAllGroups)
@@ -61,12 +52,6 @@ public sealed class RandomSpriteSystem: SharedRandomSpriteSystem // LuaM del: pa
                 {
                     if (selectedState.Value == $"Inherit")
                         color = previousColor;
-                    // LuaM start: mapped colours
-                    else if (mappedColors.TryGetValue(selectedState.Value, out var mappedColor))
-                    {
-                        color = mappedColor;
-                    }
-                    // LuaM end Frontier
                     else
                     {
                         color = _random.Pick(_prototype.Index<ColorPalettePrototype>(selectedState.Value).Colors.Values);
